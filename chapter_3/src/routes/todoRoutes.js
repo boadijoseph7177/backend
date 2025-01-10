@@ -12,7 +12,12 @@ router.get('/', (req, res) =>{
 })
 
 //Create new to-do
-router.post('/', (req, res) => {})
+router.post('/', (req, res) => {
+    const {task} = req.body
+    const insertTodo = db.prepare(`INSERT INTO todos (user_id, task) VALUES (?,?)`)
+    insertTodo.run(req.userId, task)
+    res.json({id: insertTodo.lastID, task, completed:0})
+})
 
 //Update to-do
 router.put('/:id', (req, res) =>{})

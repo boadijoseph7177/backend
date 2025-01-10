@@ -19,3 +19,16 @@ Content-Type: application/json
     "username": "Joseph",
     "password": "Bjoe7177"
 }
+
+### Fetch all todos GET /TODOS (protected)
+GET http://localhost:5000/todos
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM2NTM5NTA0LCJleHAiOjE3MzY2MjU5MDR9.fcxYIasLGUEfiUkzxvmKZ1T9-GDCdDKam_qPJbo5jOY 
+
+### Create a new todo 
+POST http://localhost:5000/todos
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM2NTM5NTA0LCJleHAiOjE3MzY2MjU5MDR9.fcxYIasLGUEfiUkzxvmKZ1T9-GDCdDKam_qPJbo5jOY 
+Content-Type: application/json
+
+{
+    "task": "Finish coding the projects"
+}
