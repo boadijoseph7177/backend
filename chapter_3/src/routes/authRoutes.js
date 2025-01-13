@@ -26,15 +26,14 @@ router.post('/register', (req, res) =>{
 
         //create a token 
         const token = jwt.sign({id: result.lastInsertRowid}, process.env.JWT_SECRET, {expiresIn: '24h'})
-        res.json({token})
+        res.status(201).json({token})
 
     } catch(err){
         console.log(err.message)
-        res.sendStatus(503)
+        res.sendStatus(503).json({error: 'Service unavailabe.Try again later'})
     }
 
     
-    res.sendStatus(201)
 })
 
 router.post('/login', (req, res) => {
