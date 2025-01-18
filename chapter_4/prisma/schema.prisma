@@ -1,0 +1,29 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int    @id @default(autoincrement()) // Primary key, auto-incremented.
+  username String @unique                       // Unique username field.
+  todos    Todo[]                              // A one-to-many relationship with the `Todo` model.
+}
+
+model Todo {
+  id        Int    @id @default(autoincrement()) // Primary key, auto-incremented.
+  task      String                              // Text of the to-do.
+  completed Boolean @default(false)             // Boolean indicating if the task is completed.
+  userId    Int                                 // Foreign key to associate with the `User` model.
+  user      User   @relation(fields: [userId], references: [id]) // Defines the relationship with the `User` model.
+}
