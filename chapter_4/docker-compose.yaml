@@ -9,7 +9,9 @@ services:
     ports:
       - "5000:5000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+
     volumes:
       - .:/app
 
@@ -22,6 +24,12 @@ services:
       POSTGRES_DB: todoapp
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
