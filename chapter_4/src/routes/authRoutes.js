@@ -17,7 +17,7 @@ router.post('/register', async(req, res) =>{
         const user = await prisma.user.create({
             data: {
                 username,
-                password: hashedPassword
+                password: hashed_password
             }
         })
 
@@ -25,18 +25,18 @@ router.post('/register', async(req, res) =>{
         const defaultTodo = `Hello :) Add your first todo!`
         await prisma.todo.create({
             data: {
-                defaultTodo,
-                userId: user
+                task: defaultTodo,
+                userId: user.id
             }
         })
 
         //create a token 
-        const token = jwt.sign({id: result.lastInsertRowid}, process.env.JWT_SECRET, {expiresIn: '24h'})
+        const token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn: '24h'})
         res.status(201).json({token})
 
     } catch(err){
         console.log(err.message)
-        res.sendStatus(503).json({error: 'Service unavailabe.Try again later'})
+        res.status(503).json({ error: 'Service unavailable. Try again later' });
     }
 
     
@@ -59,7 +59,6 @@ router.post('/login', async(req, res) => {
         //if password does not match, return out of the function
         if (!passwordIsValid)
             {return res.status(401).send({message: "Invalid password"})}
-        console.log(user)
         const token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn: '24h'})
         res.json({token})
 
