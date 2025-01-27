@@ -5,7 +5,6 @@ This guide provides an overview of the codebase, the functionality of the app, a
 ## Overview
 
 This is an **Dockerized** and authentication-protected Todo App using **Node.js**, **Express.js**, **bcrypt**, **JWT authentication**, **Prisma**, and **PostgreSQL**. The app allows users to:
-
 - **Register**: Create a new account.
 - **Login**: Authenticate and receive a JWT token.
 - **Manage Todos**: Perform auth protected CRUD operations on their own todo tasks after logging in.
@@ -89,7 +88,7 @@ cd backend-todo-app
 
 `docker compose run app npx prisma migrate dev --name init`
 
-_Also_ - to run/apply migrations if necessary:
+*Also* - to run/apply migrations if necessary:
 
 `docker-compose run app npx prisma migrate deploy`
 
@@ -97,7 +96,7 @@ _Also_ - to run/apply migrations if necessary:
 
 `docker compose up`
 
-_or_
+*or*
 
 `docker compose up -d`
 
@@ -126,7 +125,6 @@ The **REST Client** file (`todo-app.rest`) is provided to help you test the API 
 ### `todo-app.rest`
 
 The `todo-app.rest` file includes requests for:
-
 - **Registering a user**: Sends a `POST` request to create a new user.
 - **Logging in**: Sends a `POST` request to authenticate a user and retrieve a JWT token.
 - **Fetching todos**: Sends a `GET` request to fetch the authenticated user's todos (JWT required).
@@ -144,3 +142,4 @@ The `todo-app.rest` file includes requests for:
 ## Conclusion
 
 This guide covers the main components of the app and how to get it up and running on your local machine. It highlights key considerations for Node.js version compatibility and provides a ready-to-use `todo-app.rest` file for testing. You can now explore the app's functionality, including authentication and CRUD operations on todos!
+
